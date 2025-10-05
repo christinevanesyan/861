@@ -1,0 +1,28 @@
+name: total_manager
+description: "Casino Companion: Total Manager - Educational tool for casino session tracking"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_secure_storage: ^9.0.0
+  uuid: ^4.2.0
+  intl: ^0.19.0
+  shared_preferences: ^2.2.2
+  fl_chart: ^0.66.0
+  url_launcher: ^6.2.5
+  in_app_review: ^2.0.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
