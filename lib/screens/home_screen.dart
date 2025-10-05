@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _loadData() async {
     final sessions = await _storage.getSessions();
     final activeSession = await _storage.getActiveSession();
-    
+
     setState(() {
       _sessions = sessions;
       _activeSession = activeSession;
@@ -41,6 +41,68 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool get _hasData {
     return _sessions.isNotEmpty;
+  }
+
+  void _showCalculatorOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Choose Calculator',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 16),
+            ListTile(
+              leading: const Icon(Icons.calculate, color: AppColors.accentBlue),
+              title: const Text('Payouts Calculator'),
+              subtitle: const Text('Calculate game payouts and odds'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PayoutsScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.casino, color: AppColors.accentBlue),
+              title: const Text('Chip Calculator'),
+              subtitle: const Text('Count and manage chip stacks'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChipCalcScreen(
+                      activeSession: _activeSession,
+                    ),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading:
+                  const Icon(Icons.attach_money, color: AppColors.accentBlue),
+              title: const Text('Tip Calculator'),
+              subtitle: const Text('Calculate tips and splits'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const TipCalcScreen()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -98,7 +160,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const PayoutsScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const PayoutsScreen()),
                     );
                   },
                 ),
@@ -124,7 +187,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const TipCalcScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const TipCalcScreen()),
                     );
                   },
                 ),
@@ -182,10 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {
-                      // Scroll to tools section (already visible in empty state)
-                      setState(() {});
-                    },
+                    onPressed: _showCalculatorOptions,
                     child: const Text('Open calculators'),
                   ),
                 ),
@@ -206,53 +267,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: 48),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Wrap(
-                spacing: 16,
-                runSpacing: 16,
-                alignment: WrapAlignment.center,
-                children: [
-                  _buildToolTile(
-                    context,
-                    'Payouts',
-                    Icons.calculate,
-                    () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const PayoutsScreen()),
-                      );
-                    },
-                  ),
-                  _buildToolTile(
-                    context,
-                    'Chip Calc',
-                    Icons.casino,
-                    () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChipCalcScreen(
-                            activeSession: _activeSession,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  _buildToolTile(
-                    context,
-                    'Tip Calc',
-                    Icons.attach_money,
-                    () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const TipCalcScreen()),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),

@@ -142,7 +142,8 @@ class _SessionCreateScreenState extends State<SessionCreateScreen> {
                 prefixText: '\$ ',
                 hintText: 'Enter initial buy-in',
               ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
               ],
@@ -170,7 +171,8 @@ class _SessionCreateScreenState extends State<SessionCreateScreen> {
                 prefixText: '\$ ',
                 hintText: 'Maximum loss allowed',
               ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
               ],
@@ -183,7 +185,8 @@ class _SessionCreateScreenState extends State<SessionCreateScreen> {
                 prefixText: '\$ ',
                 hintText: 'Target profit',
               ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
               ],
@@ -200,10 +203,7 @@ class _SessionCreateScreenState extends State<SessionCreateScreen> {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: _createSession,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Text('Start Session'),
-              ),
+              child: const Text('Start Session'),
             ),
           ],
         ),
